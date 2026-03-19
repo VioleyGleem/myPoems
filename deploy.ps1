@@ -48,8 +48,10 @@ if (Test-Path $PublicPath) {
     Remove-Item -Recurse -Force $PublicPath -ErrorAction SilentlyContinue
 }
 
-# 加上 --buildFuture 参数，彻底无视时间差问题
-hugo --minify --buildFuture
+# 只需要执行这一行，不需要重复
+hugo --minify --buildFuture --cleanDestinationDir
+
+
 if ($LASTEXITCODE -ne 0) {
     Write-Host "❌ Hugo 构建失败。" -ForegroundColor Red
     exit 1
